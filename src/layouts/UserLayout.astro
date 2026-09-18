@@ -1,0 +1,46 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  brand?: string;
+  links?: Array<{ label: string; href: string }>;
+  actionLabel?: string;
+  actionHref?: string;
+}
+
+const { title, description, brand, links, actionLabel, actionHref } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="user-layout">
+    <Navbar brand={brand} links={links} actionLabel={actionLabel} actionHref={actionHref} />
+    <main class="user-main">
+      <slot />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .user-layout {
+    width: min(100% - 3rem, 1280px);
+    min-height: 100svh;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-main {
+    flex: 1;
+  }
+
+  @media (max-width: 640px) {
+    .user-layout {
+      width: min(100% - 2rem, 1280px);
+    }
+  }
+</style>
