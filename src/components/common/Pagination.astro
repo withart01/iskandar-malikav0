@@ -1,0 +1,26 @@
+---
+interface Props {
+	currentPage: number;
+	totalPages: number;
+	baseUrl?: string;
+}
+
+const { currentPage, totalPages, baseUrl = '?' } = Astro.props;
+const pageUrl = (page: number) => `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}page=${page}`;
+---
+
+{totalPages > 1 && (
+	<nav class="pagination" aria-label="Pagination">
+		{currentPage > 1 && <a href={pageUrl(currentPage - 1)} rel="prev">Sebelumnya</a>}
+		<span aria-current="page">{currentPage} / {totalPages}</span>
+		{currentPage < totalPages && <a href={pageUrl(currentPage + 1)} rel="next">Berikutnya</a>}
+	</nav>
+)}
+
+<style>
+	.pagination { display: flex; align-items: center; justify-content: center; gap: 1rem; color: var(--color-ink-muted); font-size: 0.78rem; }
+	.pagination a { color: var(--color-ink); text-decoration: none; }
+	.pagination a:hover, .pagination a:focus-visible { color: var(--color-accent-soft); }
+	.pagination a:focus-visible { outline: 2px solid var(--color-accent-soft); outline-offset: 3px; }
+	.pagination [aria-current='page'] { color: var(--color-accent-soft); }
+</style>

@@ -1,0 +1,57 @@
+---
+interface Props {
+	variant?: 'primary' | 'secondary' | 'ghost';
+	href?: string;
+	type?: 'button' | 'submit' | 'reset';
+	ariaLabel?: string;
+}
+
+const { variant = 'primary', href, type = 'button', ariaLabel } = Astro.props;
+const className = `button button--${variant}`;
+---
+
+{href ? (
+	<a class={className} href={href} aria-label={ariaLabel}>
+		<slot />
+	</a>
+) : (
+	<button class={className} type={type} aria-label={ariaLabel}>
+		<slot />
+	</button>
+)}
+
+<style>
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0.7rem 1.15rem;
+		border: 1px solid transparent;
+		border-radius: 999px;
+		font: inherit;
+		font-size: 0.78rem;
+		font-weight: 600;
+		letter-spacing: 0.06em;
+		text-decoration: none;
+		cursor: pointer;
+		transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+	}
+
+	.button--primary { background: var(--color-accent); color: var(--color-surface); }
+	.button--primary:hover, .button--primary:focus-visible { background: var(--color-accent-soft); }
+	.button--secondary { border-color: var(--color-border); color: var(--color-ink); }
+	.button--secondary:hover, .button--secondary:focus-visible { border-color: var(--color-accent); color: var(--color-accent-soft); }
+	.button--ghost { color: var(--color-ink-muted); }
+	.button--ghost:hover, .button--ghost:focus-visible { color: var(--color-accent-soft); }
+	.button:focus-visible { outline: 2px solid var(--color-accent-soft); outline-offset: 3px; }
+</style>
+
+<style is:global>
+	.button { font-family: var(--font-sans); }
+</style>
+
+<!-- Button is intentionally self-contained so it can be used across Astro pages. -->
+<style>
+	:global(.button) { box-sizing: border-box; }
+</style>
