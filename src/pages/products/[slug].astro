@@ -1,0 +1,16 @@
+---
+import UserLayout from '../../layouts/UserLayout.astro';
+export function getStaticPaths() {
+  return [{ params: { slug: 'contoh-produk' } }];
+}
+
+const { slug } = Astro.params;
+---
+
+<UserLayout title="Detail Produk — NARA" brand="NARA" actionLabel="Keranjang" actionHref="/cart">
+  <section class="page-intro">
+    <p class="eyebrow">Detail produk</p>
+    <h1>{slug ?? 'Produk'}</h1>
+    <p>Halaman detail produk akan dikembangkan pada tahap katalog.</p>
+  </section>
+</UserLayout>
