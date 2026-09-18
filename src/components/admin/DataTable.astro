@@ -1,0 +1,7 @@
+---
+interface Column { key: string; label: string }
+interface Props { columns: Column[]; rows: Array<Record<string, string | number>>; emptyMessage?: string }
+const { columns, rows, emptyMessage = 'Belum ada data.' } = Astro.props;
+---
+<div class="table-wrap"><table><thead><tr>{columns.map((column) => <th scope="col">{column.label}</th>)}</tr></thead><tbody>{rows.length ? rows.map((row) => <tr>{columns.map((column) => <td>{row[column.key]}</td>)}</tr>) : <tr><td colspan={columns.length}>{emptyMessage}</td></tr>}</tbody></table></div>
+<style>.table-wrap{overflow-x:auto;border:1px solid var(--color-border)}table{width:100%;border-collapse:collapse;min-width:34rem}th,td{padding:.85rem 1rem;border-bottom:1px solid var(--color-border);text-align:left;font-size:.8rem}th{color:var(--color-ink-subtle);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}td{color:var(--color-ink-muted)}tbody tr:last-child td{border-bottom:0}</style>
