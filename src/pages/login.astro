@@ -1,11 +1,105 @@
 ---
 import UserLayout from '../layouts/UserLayout.astro';
+import Input from '../components/common/Input.astro';
+import Button from '../components/common/Button.astro';
 ---
 
 <UserLayout title="Masuk — NARA" brand="NARA">
-  <section class="page-intro">
-    <p class="eyebrow">Akun NARA</p>
-    <h1>Masuk</h1>
-    <p>Form autentikasi akan ditambahkan pada tahap berikutnya.</p>
+  <section class="login-container">
+    <div class="login-intro">
+      <p class="eyebrow">Akun NARA</p>
+      <h1>Masuk</h1>
+      <p class="subtitle">Akses koleksi pribadi dan pesanan Anda.</p>
+    </div>
+
+    <form class="login-form" action="/api/auth/session" method="POST">
+      <fieldset>
+        <Input label="Email" name="email" type="email" placeholder="nama@example.com" required autocomplete="email" />
+        <Input label="Password" name="password" type="password" placeholder="••••••••" required autocomplete="current-password" />
+      </fieldset>
+
+      <Button type="submit" variant="primary">Masuk</Button>
+
+      <p class="auth-footer">
+        Belum punya akun? <a href="/register">Daftar di sini</a>
+      </p>
+    </form>
   </section>
 </UserLayout>
+
+<style>
+  .login-container {
+    width: min(100% - 3rem, 420px);
+    margin: 3rem auto;
+    padding: 3rem 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+  }
+
+  .login-intro {
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-ink-subtle);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin: 0 0 0.5rem;
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--color-ink-muted);
+    font-size: 0.9rem;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .auth-footer {
+    margin: 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-ink-muted);
+  }
+
+  .auth-footer a {
+    color: var(--color-accent-soft);
+    text-decoration: none;
+  }
+
+  .auth-footer a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    .login-container {
+      width: 100%;
+      margin: 1.5rem auto;
+      padding: 2rem 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
