@@ -1,0 +1,6 @@
+---
+interface Props { subtotal: string; shipping?: string; total: string; checkoutHref?: string }
+const { subtotal, shipping = 'Dihitung saat checkout', total, checkoutHref = '#' } = Astro.props;
+---
+<aside class="cart-summary"><h2>Ringkasan pesanan</h2><dl><div><dt>Subtotal</dt><dd>{subtotal}</dd></div><div><dt>Pengiriman</dt><dd>{shipping}</dd></div><div class="total"><dt>Total</dt><dd>{total}</dd></div></dl><a class="checkout" href={checkoutHref}>Lanjut ke checkout</a></aside>
+<style>.cart-summary{padding:1.5rem;border:1px solid var(--color-border)}h2{margin:0 0 1.5rem;font-size:1rem;font-weight:500}dl{margin:0}dl div{display:flex;justify-content:space-between;gap:1rem;padding:.7rem 0;color:var(--color-ink-muted);font-size:.8rem}dt,dd{margin:0}.total{border-top:1px solid var(--color-border);margin-top:.5rem;padding-top:1rem!important;color:var(--color-ink)!important;font-size:1rem!important}.checkout{display:block;margin-top:1rem;padding:.8rem;text-align:center;background:var(--color-accent);color:var(--color-surface);font-size:.75rem;text-decoration:none}.checkout:hover{background:var(--color-accent-soft)}</style>

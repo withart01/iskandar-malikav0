@@ -1,0 +1,7 @@
+---
+interface Props { images: Array<{ src: string; alt: string }>; mainIndex?: number }
+const { images, mainIndex = 0 } = Astro.props;
+const main = images[mainIndex] ?? images[0];
+---
+<div class="gallery">{main && <div class="gallery-main"><img src={main.src} alt={main.alt} /></div>}<div class="gallery-thumbs">{images.map((image, index) => <a href={`#image-${index}`} aria-label={`Lihat ${image.alt}`}><img id={`image-${index}`} src={image.src} alt={image.alt} loading="lazy" /></a>)}</div></div>
+<style>.gallery{display:grid;gap:1rem}.gallery-main{aspect-ratio:1;background:color-mix(in srgb,var(--color-ink) 5%,transparent)}.gallery-main img{width:100%;height:100%;object-fit:cover}.gallery-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem}.gallery-thumbs a{aspect-ratio:1;overflow:hidden}.gallery-thumbs img{width:100%;height:100%;object-fit:cover;opacity:.7}.gallery-thumbs a:hover img{opacity:1}</style>

@@ -1,0 +1,8 @@
+---
+interface Props { title?: string; items?: Array<{ label: string; href: string; active?: boolean }> }
+const { title = 'Workspace', items = [] } = Astro.props;
+---
+<aside class="sidebar" aria-label={title}><p class="sidebar-title">{title}</p><nav><ul>{items.map((item) => <li><a class:list={{ active: item.active }} href={item.href}>{item.label}</a></li>)}</ul></nav></aside>
+<style>
+  .sidebar { width:15rem; flex:0 0 15rem; padding:1.5rem 1rem; border-right:1px solid var(--color-border); } .sidebar-title { color:var(--color-ink-subtle); font-size:.65rem; letter-spacing:.14em; text-transform:uppercase; } ul { display:grid; gap:.35rem; list-style:none; margin:1.5rem 0 0; padding:0; } a { display:block; padding:.7rem .75rem; color:var(--color-ink-muted); font-size:.85rem; text-decoration:none; border-radius:.25rem; } a:hover,a.active { background:color-mix(in srgb,var(--color-accent) 12%,transparent); color:var(--color-ink); } @media(max-width:700px){.sidebar{width:100%;border-right:0;border-bottom:1px solid var(--color-border);}}
+</style>

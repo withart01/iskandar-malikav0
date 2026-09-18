@@ -1,0 +1,16 @@
+---
+interface Props { brand?: string; links?: Array<{ label: string; href: string }>; actionLabel?: string; actionHref?: string }
+const { brand = 'ATELIER', links = [], actionLabel, actionHref } = Astro.props;
+---
+<header class="navbar">
+  <a class="brand" href="/">{brand}</a>
+  <nav aria-label="Navigasi utama"><ul>{links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}</ul></nav>
+  {actionLabel && actionHref && <a class="navbar-action" href={actionHref}>{actionLabel}</a>}
+</header>
+<style>
+  .navbar { display:flex; align-items:center; justify-content:space-between; gap:2rem; padding:1.25rem 0; border-bottom:1px solid var(--color-border); }
+  .brand { color:var(--color-ink); font-weight:700; letter-spacing:.2em; text-decoration:none; }
+  nav ul { display:flex; gap:1.5rem; list-style:none; margin:0; padding:0; } nav a,.navbar-action { color:var(--color-ink-muted); font-size:.75rem; text-decoration:none; } nav a:hover,.navbar-action:hover { color:var(--color-accent-soft); }
+  .navbar-action { border:1px solid var(--color-border); padding:.6rem .85rem; color:var(--color-ink); }
+  @media (max-width:640px) { nav { display:none; } }
+</style>

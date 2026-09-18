@@ -1,0 +1,6 @@
+---
+interface Props { label: string; value: string; change?: string; trend?: 'up' | 'down' | 'neutral' }
+const { label, value, change, trend = 'neutral' } = Astro.props;
+---
+<article class="stat-card"><p>{label}</p><strong>{value}</strong>{change && <span class:list={{ up: trend === 'up', down: trend === 'down' }}>{change}</span>}</article>
+<style>.stat-card{display:grid;gap:.6rem;padding:1.25rem;border:1px solid var(--color-border);background:color-mix(in srgb,var(--color-ink) 3%,transparent)}p{margin:0;color:var(--color-ink-subtle);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}strong{font-size:1.8rem;font-weight:500}.stat-card span{color:var(--color-ink-muted);font-size:.75rem}.stat-card .up{color:#9bc49d}.stat-card .down{color:#d99486}</style>
