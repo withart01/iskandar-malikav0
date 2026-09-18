@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Sidebar from '../components/layout/Sidebar.astro';
+import AdminHeader from '../components/admin/AdminHeader.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  sidebarTitle?: string;
+  sidebarItems?: Array<{ label: string; href: string; active?: boolean }>;
+  heading: string;
+  headingDescription?: string;
+  actionLabel?: string;
+  actionHref?: string;
+}
+
+const {
+  title = 'Admin — NARA',
+  description = 'Kelola katalog dan operasional NARA.',
+  sidebarTitle,
+  sidebarItems,
+  heading,
+  headingDescription,
+  actionLabel,
+  actionHref,
+} = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="admin-layout">
+    <Sidebar title={sidebarTitle} items={sidebarItems} />
+    <div class="admin-content">
+      <AdminHeader
+        title={heading}
+        description={headingDescription}
+        actionLabel={actionLabel}
+        actionHref={actionHref}
+      />
+      <main class="admin-main">
+        <slot />
+      </main>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .admin-layout {
+    min-height: 100svh;
+    display: flex;
+  }
+
+  .admin-content {
+    min-width: 0;
+    flex: 1;
+    padding: 0 clamp(1rem, 4vw, 3rem);
+  }
+
+  .admin-main {
+    padding-block: 2rem 3rem;
+  }
+
+  @media (max-width: 700px) {
+    .admin-layout {
+      display: block;
+    }
+
+    .admin-content {
+      padding-inline: 1rem;
+    }
+  }
+</style>
