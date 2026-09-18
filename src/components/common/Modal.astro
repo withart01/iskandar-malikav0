@@ -1,0 +1,28 @@
+---
+interface Props {
+	title: string;
+	open?: boolean;
+	id?: string;
+}
+
+const { title, open = false, id = 'modal' } = Astro.props;
+---
+
+<dialog class="modal" id={id} open={open} aria-labelledby={`${id}-title`}>
+	<div class="modal__panel">
+		<header class="modal__header">
+			<h2 id={`${id}-title`}>{title}</h2>
+			<slot name="close" />
+		</header>
+		<div class="modal__body"><slot /></div>
+	</div>
+</dialog>
+
+<style>
+	.modal { width: min(92vw, 34rem); padding: 0; border: 1px solid var(--color-border); border-radius: 0.6rem; background: var(--color-surface); color: var(--color-ink); }
+	.modal::backdrop { background: rgba(0, 0, 0, 0.65); }
+	.modal__panel { padding: 1.5rem; }
+	.modal__header { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
+	.modal h2 { margin: 0; font-size: 1.25rem; }
+	.modal__body { margin-top: 1rem; color: var(--color-ink-muted); line-height: 1.6; }
+</style>
