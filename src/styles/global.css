@@ -153,6 +153,13 @@ h1 em {
 	line-height: 1.6;
 }
 
+.splash-actions {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 16px;
+}
+
 .enter-link {
 	display: inline-flex;
 	align-items: center;
@@ -173,7 +180,21 @@ h1 em {
 	gap: 28px;
 }
 
+.login-link {
+	color: var(--color-ink-subtle);
+	font-size: 0.7rem;
+	letter-spacing: 0.05em;
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.login-link:hover,
+.login-link:focus-visible {
+	color: var(--color-accent-soft);
+}
+
 .enter-link:focus-visible,
+.login-link:focus-visible,
 .wordmark:focus-visible,
 .site-footer a:focus-visible {
 	outline: 2px solid var(--color-accent-soft);
