@@ -1,0 +1,12 @@
+---
+import AdminLayout from '../../../../layouts/AdminLayout.astro';
+export function getStaticPaths() {
+  return [{ params: { id: 'contoh-produk' } }];
+}
+
+const { id } = Astro.params;
+---
+
+<AdminLayout heading="Edit produk" headingDescription={`Mengubah produk ${id ?? ''}.`}>
+  <section class="page-intro"><p class="eyebrow">Katalog</p><h1>Edit produk</h1><p>Form perubahan produk akan tersedia di sini.</p></section>
+</AdminLayout>

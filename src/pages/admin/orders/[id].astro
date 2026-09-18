@@ -1,0 +1,12 @@
+---
+import AdminLayout from '../../../layouts/AdminLayout.astro';
+export function getStaticPaths() {
+  return [{ params: { id: 'contoh-pesanan' } }];
+}
+
+const { id } = Astro.params;
+---
+
+<AdminLayout heading="Detail pesanan" headingDescription={`Ringkasan pesanan ${id ?? ''}.`}>
+  <section class="page-intro"><p class="eyebrow">Operasional</p><h1>Detail pesanan</h1><p>Detail dan status pesanan akan tersedia di halaman ini.</p></section>
+</AdminLayout>
